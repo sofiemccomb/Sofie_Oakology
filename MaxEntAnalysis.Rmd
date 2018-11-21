@@ -8,7 +8,7 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
+# nEW lINE
 #Bring in asciis with raster function
 #Subtract them to look at difference
 
