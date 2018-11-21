@@ -1,0 +1,169 @@
+---
+title: "QT Range Shift"
+author: "Sofie McComb"
+date: "November 19, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#Bring in asciis with raster function
+#Subtract them to look at difference
+
+Scenarios
+
+A MPI_rcp45 (cool-wet)
+B CCSM4_rcp85 (warm-wet)
+C MIROC_rcp45 (cool-dry)
+D MIROC_rcp85 (warm-dry)
+
+Timeperiods
+Historic: 1981-2010
+
+Projected
+1.2010_2039
+2.2040_2069
+3.2070_2099
+
+```{r}
+library(raster)
+
+#For All Islands 100m
+
+#Read in historic SDM which will be the same for all comparisons
+hist<-raster("G:/data/tools/MaxEnt/Output/allislands_100m/historic/final/quercus_tomentella.asc")
+proj4string(hist) <- CRS("+proj=aea +lat_1=34 +lat_2=40.5 +lat_0=0 +lon_0=-120 +x_0=0 +y_0=-4000000 +ellps=GRS80 +datum=NAD83 +units=m +no_defs") 
+writeRaster(hist, filename = "G:/data/tools/MaxEnt/Output_tiff/allislands_100m/historic.tif", format="GTiff", overwrite=TRUE)
+
+
+#Run through all the projected scenarios and then create comparison raster
+##############################
+# MPI_rcp45 all time periods
+#2010_2039
+projA1<-raster("G:/data/tools/MaxEnt/Output/allislands_100m/MPI_rcp45_2010_2039/final/quercus_tomentella.asc")
+proj4string(projA1) <- CRS("+proj=aea +lat_1=34 +lat_2=40.5 +lat_0=0 +lon_0=-120 +x_0=0 +y_0=-4000000 +ellps=GRS80 +datum=NAD83 +units=m +no_defs") 
+writeRaster(projA1, filename = "G:/data/tools/MaxEnt/Output_tiff/allislands_100m/MPI_rcp45_2010_2039.tif", format="GTiff", overwrite=TRUE)
+diffA1<-projA1-hist
+writeRaster(diffA1, filename="G:/data/tools/MaxEnt/Analysis/allislands_100m/MPI_rcp45_2010_2039.tif", format="GTiff", overwrite=TRUE)
+
+#2040_2069
+projA2<-raster("G:/data/tools/MaxEnt/Output/allislands_100m/MPI_rcp45_2040_2069/final/quercus_tomentella.asc")
+proj4string(projA2) <- CRS("+proj=aea +lat_1=34 +lat_2=40.5 +lat_0=0 +lon_0=-120 +x_0=0 +y_0=-4000000 +ellps=GRS80 +datum=NAD83 +units=m +no_defs")
+writeRaster(projA2, filename = "G:/data/tools/MaxEnt/Output_tiff/allislands_100m/MPI_rcp45_2040_2069.tif", format="GTiff", overwrite=TRUE)
+diffA2<-projA2-hist
+writeRaster(diffA2, filename="G:/data/tools/MaxEnt/Analysis/allislands_100m/MPI_rcp45_2040_2069.tif", format="GTiff", overwrite=TRUE)
+
+#2070_2099
+projA3<-raster("G:/data/tools/MaxEnt/Output/allislands_100m/MPI_rcp45_2070_2099/final/quercus_tomentella.asc")
+proj4string(projA3) <- CRS("+proj=aea +lat_1=34 +lat_2=40.5 +lat_0=0 +lon_0=-120 +x_0=0 +y_0=-4000000 +ellps=GRS80 +datum=NAD83 +units=m +no_defs") 
+writeRaster(projA3, filename = "G:/data/tools/MaxEnt/Output_tiff/allislands_100m/MPI_rcp45_2070_2099.tif", format="GTiff", overwrite=TRUE)
+diffA3<-projA3-hist
+writeRaster(diffA3, filename="G:/data/tools/MaxEnt/Analysis/allislands_100m/MPI_rcp45_2070_2099.tif", format="GTiff", overwrite=TRUE)
+##############################
+
+##############################
+# CCSM4_rcp85 all time periods
+#2010_2039
+projB1<-raster("G:/data/tools/MaxEnt/Output/allislands_100m/CCSM4_rcp85_2010_2039/final/quercus_tomentella.asc")
+proj4string(projB1) <- CRS("+proj=aea +lat_1=34 +lat_2=40.5 +lat_0=0 +lon_0=-120 +x_0=0 +y_0=-4000000 +ellps=GRS80 +datum=NAD83 +units=m +no_defs") 
+writeRaster(projB1, filename = "G:/data/tools/MaxEnt/Output_tiff/allislands_100m/CCSM4_rcp85_2010_2039.tif", format="GTiff", overwrite=TRUE)
+diffB1<-projB1-hist
+writeRaster(diffB1, filename="G:/data/tools/MaxEnt/Analysis/allislands_100m/CCSM4_rcp85_2010_2039.tif", format="GTiff", overwrite=TRUE)
+
+#2040_2069
+projB2<-raster("G:/data/tools/MaxEnt/Output/allislands_100m/CCSM4_rcp85_2040_2069/final/quercus_tomentella.asc")
+proj4string(projB2) <- CRS("+proj=aea +lat_1=34 +lat_2=40.5 +lat_0=0 +lon_0=-120 +x_0=0 +y_0=-4000000 +ellps=GRS80 +datum=NAD83 +units=m +no_defs") 
+writeRaster(projB2, filename = "G:/data/tools/MaxEnt/Output_tiff/allislands_100m/CCSM4_rcp85_2040_2069.tif", format="GTiff", overwrite=TRUE)
+diffB2<-projB2-hist
+writeRaster(diffB2, filename="G:/data/tools/MaxEnt/Analysis/allislands_100m/CCSM4_rcp85_2040_2069.tif", format="GTiff", overwrite=TRUE)
+
+#2070_2099
+projB3<-raster("G:/data/tools/MaxEnt/Output/allislands_100m/CCSM4_rcp85_2070_2099/final/quercus_tomentella.asc")
+proj4string(projB3) <- CRS("+proj=aea +lat_1=34 +lat_2=40.5 +lat_0=0 +lon_0=-120 +x_0=0 +y_0=-4000000 +ellps=GRS80 +datum=NAD83 +units=m +no_defs") 
+writeRaster(projB3, filename = "G:/data/tools/MaxEnt/Output_tiff/allislands_100m/CCSM4_rcp85_2070_2099.tif", format="GTiff", overwrite=TRUE)
+diffB3<-projB3-hist
+writeRaster(diffB3, filename="G:/data/tools/MaxEnt/Analysis/allislands_100m/CCSM4_rcp85_2070_2099.tif", format="GTiff", overwrite=TRUE)
+
+##############################
+
+##############################
+# MIROC_rcp45 all time periods
+#2010_2039
+projC1<-raster("G:/data/tools/MaxEnt/Output/allislands_100m/MIROC_rcp45_2010_2039/final/quercus_tomentella.asc")
+proj4string(projC1) <- CRS("+proj=aea +lat_1=34 +lat_2=40.5 +lat_0=0 +lon_0=-120 +x_0=0 +y_0=-4000000 +ellps=GRS80 +datum=NAD83 +units=m +no_defs") 
+writeRaster(projC1, filename = "G:/data/tools/MaxEnt/Output_tiff/allislands_100m/MIROC_rcp45_2010_2039.tif", format="GTiff", overwrite=TRUE)
+diffC1<-projC1-hist
+writeRaster(diffC1, filename="G:/data/tools/MaxEnt/Analysis/allislands_100m/MIROC_rcp45_2010_2039.tif", format="GTiff", overwrite=TRUE)
+
+#2040_2069
+projC2<-raster("G:/data/tools/MaxEnt/Output/allislands_100m/MIROC_rcp45_2040_2069/final/quercus_tomentella.asc")
+proj4string(projC2) <- CRS("+proj=aea +lat_1=34 +lat_2=40.5 +lat_0=0 +lon_0=-120 +x_0=0 +y_0=-4000000 +ellps=GRS80 +datum=NAD83 +units=m +no_defs") 
+writeRaster(projC2, filename = "G:/data/tools/MaxEnt/Output_tiff/allislands_100m/MIROC_rcp45_2040_2069.tif", format="GTiff", overwrite=TRUE)
+diffC2<-projC2-hist
+writeRaster(diffC2, filename="G:/data/tools/MaxEnt/Analysis/allislands_100m/MIROC_rcp45_2040_2069.tif", format="GTiff", overwrite=TRUE)
+
+#2070_2099
+projC3<-raster("G:/data/tools/MaxEnt/Output/allislands_100m/MIROC_rcp45_2070_2099/final/quercus_tomentella.asc")
+proj4string(projC3) <- CRS("+proj=aea +lat_1=34 +lat_2=40.5 +lat_0=0 +lon_0=-120 +x_0=0 +y_0=-4000000 +ellps=GRS80 +datum=NAD83 +units=m +no_defs") 
+writeRaster(projC3, filename = "G:/data/tools/MaxEnt/Output_tiff/allislands_100m/MIROC_rcp45_2070_2099.tif", format="GTiff", overwrite=TRUE)
+diffC3<-projC3-hist
+writeRaster(diffC3, filename="G:/data/tools/MaxEnt/Analysis/allislands_100m/MIROC_rcp45_2070_2099.tif", format="GTiff", overwrite=TRUE)
+
+##############################
+
+##############################
+# MIROC_rcp85 all time periods
+#2010_2039
+projD1<-raster("G:/data/tools/MaxEnt/Output/allislands_100m/MIROC_rcp85_2010_2039/final/quercus_tomentella.asc")
+proj4string(projD1) <- CRS("+proj=aea +lat_1=34 +lat_2=40.5 +lat_0=0 +lon_0=-120 +x_0=0 +y_0=-4000000 +ellps=GRS80 +datum=NAD83 +units=m +no_defs") 
+writeRaster(projD1, filename = "G:/data/tools/MaxEnt/Output_tiff/allislands_100m/MIROC_rcp85_2010_2039.tif", format="GTiff", overwrite=TRUE)
+diffD1<-projD1-hist
+writeRaster(diffD1, filename="G:/data/tools/MaxEnt/Analysis/allislands_100m/MIROC_rcp85_2010_2039.tif", format="GTiff", overwrite=TRUE)
+
+#2040_2069
+projD2<-raster("G:/data/tools/MaxEnt/Output/allislands_100m/MIROC_rcp85_2040_2069/final/quercus_tomentella.asc")
+proj4string(projD2) <- CRS("+proj=aea +lat_1=34 +lat_2=40.5 +lat_0=0 +lon_0=-120 +x_0=0 +y_0=-4000000 +ellps=GRS80 +datum=NAD83 +units=m +no_defs") 
+writeRaster(projD2, filename = "G:/data/tools/MaxEnt/Output_tiff/allislands_100m/MIROC_rcp85_2040_2069.tif", format="GTiff", overwrite=TRUE)
+diffD2<-projD2-hist
+writeRaster(diffD2, filename="G:/data/tools/MaxEnt/Analysis/allislands_100m/MIROC_rcp85_2040_2069.tif", format="GTiff", overwrite=TRUE)
+
+#2070_2099
+projD3<-raster("G:/data/tools/MaxEnt/Output/allislands_100m/MIROC_rcp85_2070_2099/final/quercus_tomentella.asc")
+proj4string(projD3) <- CRS("+proj=aea +lat_1=34 +lat_2=40.5 +lat_0=0 +lon_0=-120 +x_0=0 +y_0=-4000000 +ellps=GRS80 +datum=NAD83 +units=m +no_defs") 
+writeRaster(projD3, filename = "G:/data/tools/MaxEnt/Output_tiff/allislands_100m/MIROC_rcp85_2070_2099.tif", format="GTiff", overwrite=TRUE)
+diffD3<-projD3-hist
+writeRaster(diffD3, filename="G:/data/tools/MaxEnt/Analysis/allislands_100m/MIROC_rcp85_2070_2099.tif", format="GTiff", overwrite=TRUE)
+
+##############################
+
+
+```
+
+```{r}
+#Extra stuff
+
+#To calculate percent gain and percent loss we would calculate the total area of the islands or island and then find the proportion that had diff value above 0 and proportion below 0
+
+
+#https://caucasus-spiders.info/r-spatial/raster-basics-3/
+
+#Figure out issues with below
+#get sizes of all cells in raster [km2]
+cell_size<-area(diff, na.rm=TRUE, weights=FALSE)
+#delete NAs from vector of all raster cells
+##NAs lie outside of the rastered region, can thus be omitted
+cell_size<-cell_size[!is.na(cell_size)]
+#compute area [km2] of all cells in geo_raster
+raster_area<-length(cell_size)*median(cell_size)
+
+diff2<-diff[is.na(diff)]
+
+#Could crop to extent of north islands and then crop to the extent of santa catalina-or at least have a close up
+
+# # this format plots the first (of 19) variables stored in BClim; change the 1 to 2-19 for the others
+# plot(diff, 1, cex=0.5, legend=T, mar=par("mar"), main="Predicted Suitability")
+# map("state", xlim=c(-119, -113), ylim=c(33.5, 38), fill=F, col="cornsilk", add=T)
+```
+
